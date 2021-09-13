@@ -104,6 +104,7 @@ export PATH=$HOME/bin:$PATH
 
 alias ez='vim ~/.zshrc'
 alias sz='source ~/.zshrc'
+alias update='sudo apt update && apt list --upgradable'
 
 alias htop='htop -d 7.5'
 
@@ -119,6 +120,7 @@ function dwp-cli
 alias dc='docker-compose'
 alias dcu='dc up'
 alias dcud='dcu -d'
+alias dcuf='dcud; dcl'
 alias dcd='dc down'
 alias dcdv='dcd -v'
 alias dcr='dcd && dcud'
@@ -146,6 +148,9 @@ alias gmm='git merge main'
 
 # git checkout main
 alias gcm='git checkout main'
+
+# git push including tags
+alias gpt='gp; gp --tags'
 
 # git export main to a directory
 function gem {
@@ -175,6 +180,25 @@ function grs {
     git rm "$1"
     git commit -m "Removed submodule $1"
     rm -rf ".git/modules/$1"
+}
+
+# compress a video file in place
+function compress-video {
+    ffmpeg -i "$1" -vcodec libx265 -acodec mp3 $(echo "$1" | cut -f 1 -d '.').mp4
+}
+
+# convert files to .mp3
+function convert-to-mp3 {
+    ffmpeg -i "$1" -q:a 0 "$(echo $1 | cut -f 1 -d '.').mp3"
+}
+
+# get the first 30 seconds of a music file
+function get-sample {
+	#$OCTAVE_RECORDS_DEFAULT_EXT=".wav"
+	#$EXTENSION="${1:-$OCTAVE_RECORDS_DEFAULT_EXT}"
+	#echo "$EXTENSION"
+    	# $OCTAVE_RECORDS_FILENAME=$(basename 01\ -\ Zuill\ Bailey\ -\ BWV\ 1007\ Suite\ No.\ 1\ in\ G\ Major\ -\ Prelude.wav .wav)
+	ffmpeg -y -i "$1" -q:a 0 -ss 0 -t 30 -af "afade=t=out:st=23:d=6" "$(basename $1 .wav).mp3"
 }
 
 # runs PHP Composer in a Docker container (defaults to latest Docker image)
