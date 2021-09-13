@@ -15,13 +15,11 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'tpope/vim-vinegar'	"enhance the built-in directory browser (netrw)
 Plugin 'preservim/nerdtree'	"add a full-featured file system explorer
-Plugin 'ctrlpvim/ctrlp.vim'	"add a full-featured file system explorer
+Plugin 'ctrlpvim/ctrlp.vim'	"searching files with fuzzy matching
 Plugin 'sonph/onehalf'		"install a theme
 
 
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-
+call vundle#end()            " all plugins must be loaded before this line
 filetype plugin indent on    " required
 
 
@@ -33,7 +31,7 @@ let g:airline_theme='onehalfdark'
 
 set t_CO=256		" force 256 colors on the terminal
 
-"truecolors
+" enable truecolors
 if exists('+termguicolors')
   let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
   let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
@@ -45,7 +43,7 @@ endif
 set hlsearch		"highlight search results
 set incsearch		"turn on incremental search
 
-"simple highlight removal
+" simple highlight removal
 nmap <leader><space> :nohlsearch<cr>
 
 "
@@ -59,23 +57,29 @@ nmap <c-e> :CtrlPMRUFiles<cr>
 " NERDTree
 "
 nmap <leader>n :NERDTreeToggle<cr>
-let NERDTreeShowHidden=1	"show hidden files
+let NERDTreeShowHidden=1	" show hidden files
+let NERDTreeHijackNetrw=0	" don't let NERDTree override vinegar
+
+
+
 
 "--------- Mappings ---------"
 
 "exit various modes by pressing ,, 
 imap <leader>, <Esc>
 vmap <leader>, <Esc>
-
+smap <leader>, <Esc>
+xmap <leader>, <Esc>
+cmap <leader>, <Esc>
+omap <leader>, <Esc>
 
 "edit the .vimrc file
 nmap <leader>ev :tabedit $MYVIMRC<cr>
 
-
-"easier buffer closing
-imap <leader>c :bd<cr>
-nmap <leader>c :bd<cr>
-vmap <leader>c :bd<cr>
+"easier tab closing
+imap <leader>c :tabclose<cr>
+nmap <leader>c :tabclose<cr>
+vmap <leader>c :tabclose<cr>
 
 
 
