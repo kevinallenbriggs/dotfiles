@@ -3,6 +3,7 @@
 # https://github.com/hendrikmi/dotfiles
 
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+
 alias dot='dotfiles'
 
 Software
