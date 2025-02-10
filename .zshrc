@@ -85,7 +85,7 @@ source $ZSH/oh-my-zsh.sh
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
-   export EDITOR='vim'
+   export EDITOR='nvim'
 # else
 #   export EDITOR='mvim'
 # fi
@@ -126,7 +126,7 @@ alias sz="source ~/.zshrc"
 alias ll="ls -lahF"
 
 # enable command-not-found
-source /etc/zsh_command_not_found
+# source /etc/zsh_command_not_found
 alias dotfiles='/usr/bin/git --git-dir=/home/kevin/.dotfiles/ --work-tree=/home/kevin'
 alias dot='dotfiles'
 
