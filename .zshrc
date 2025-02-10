@@ -129,3 +129,6 @@ alias ll="ls -lahF"
 source /etc/zsh_command_not_found
 alias dotfiles='/usr/bin/git --git-dir=/home/kevin/.dotfiles/ --work-tree=/home/kevin'
 alias dot='dotfiles'
+
+# set XDG Config dir
+export XDG_CONFIG_HOME="$HOME/.config"
