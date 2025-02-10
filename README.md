@@ -25,3 +25,5 @@ Software
 - glances
 - 7z
 - flameshot
+- slack
+- zoom
