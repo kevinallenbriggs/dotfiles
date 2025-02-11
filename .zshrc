@@ -116,11 +116,14 @@ export PATH="$FLYCTL_INSTALL/bin:$PATH"
 # nvim - see https://github.com/neovim/neovim/blob/master/INSTALL.md#install-from-package
 export PATH="$PATH:/opt/nvim-linux64/bin"
 alias vim="nvim"
-alias v="nvim"
+alias v="vim"
 
-# easy editing of this files
-alias ez="vim ~/.zshrc"
+# easy editing of workflow configuration tools
+alias ez="v ~/.zshrc"
 alias sz="source ~/.zshrc"
+alias et="v ~/.config/tmux/"
+alias st="tmux source ~/.config/tmux/tmux.conf"
+alias ev="v ~/.config/nvim/"
 
 # QOL
 alias ll="ls -lahF"
