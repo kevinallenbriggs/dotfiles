@@ -9,6 +9,7 @@ alias dot='dotfiles'
 Software
 
 - git
+- lazygit
 - nvim
 - zsh
 - oh-my-zsh
@@ -27,3 +28,5 @@ Software
 - flameshot
 - slack
 - zoom
+- tmux
+- tpm

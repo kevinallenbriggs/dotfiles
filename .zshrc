@@ -121,7 +121,7 @@ alias v="vim"
 # easy editing of workflow configuration tools
 alias ez="v ~/.zshrc"
 alias sz="source ~/.zshrc"
-alias et="v ~/.config/tmux/"
+alias et="v ~/.config/tmux/tmux.conf"
 alias st="tmux source ~/.config/tmux/tmux.conf"
 alias ev="v ~/.config/nvim/"
 
