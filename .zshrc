@@ -72,7 +72,8 @@ ZSH_THEME="af-magic"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git aliases rsync docker docker-compose command-not-found colored-man-pages sudo)
+# plugins=(git aliases rsync docker docker-compose command-not-found colored-man-pages sudo)
+plugins=(git aliases rsync docker docker-compose colored-man-pages sudo)
 
 source $ZSH/oh-my-zsh.sh
 
