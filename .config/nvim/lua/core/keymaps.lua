@@ -16,7 +16,7 @@ local function mergeOpts(originalOpts, overrideOpts)
 end
 
 -- more convenient way to <Esc>
-vim.keymap.set("n", "kj", "<Esc>", defaultOpts)
+-- vim.keymap.set("n", "kj", "<Esc>", defaultOpts)
 vim.keymap.set("i", "kj", "<Esc>", defaultOpts)
 
 -- save file
