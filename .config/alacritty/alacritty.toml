@@ -1,7 +1,7 @@
 # Configuration for Alacritty, the GPU enhanced terminal emulator.
 [keyboard]
 bindings = [
-    { "key" = "Space", "mods" = "Control", "chars" = "\u0000" }
+    { "key" = "Space", "mods" = "Control", "chars" = "\x00" }
 ]
 
 [env]
