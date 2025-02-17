@@ -1,12 +1,20 @@
-# https://www.atlassian.com/git/tutorials/dotfiles
+# Setup
 
-# https://github.com/hendrikmi/dotfiles
+https://www.atlassian.com/git/tutorials/dotfiles
+https://github.com/hendrikmi/dotfiles
 
-alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+```bash
+echo "alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'" >> $HOME/.zshrc
+echo "alias dot=dotfiles" >> $HOME/.zshrc
 
-alias dot='dotfiles'
+mkdir -p $HOME/.dotfiles
+git clone --bare git@github.com:kevinallenbriggs/dotfiles.git $HOME/.dotfiles
+cd $HOME
+dotfiles checkout # Fedora
+dotfiles checkout wsl # Windows/WSL
+```
 
-Software
+# Software
 
 - git
 - lazygit
