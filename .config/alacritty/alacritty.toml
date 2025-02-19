@@ -1,8 +1,8 @@
 # Configuration for Alacritty, the GPU enhanced terminal emulator.
 [keyboard]
-bindings = [
-    { "key" = "Space", "mods" = "Control", "chars" = "\x00" }
-]
+# bindings = [
+#     { "key" = "Space", "mods" = "Control", "chars" = "\x00" }
+# ]
 
 [env]
 # TERM: alacritty
@@ -36,4 +36,4 @@ bold_italic = {family = "Hack Nerd Font Mono", style = "Bold Italic"}
 size = 14.0
 
 [terminal]
-shell = { program = "wsl.exe ~ -d Ubuntu-22.04" }
+# shell = { program = "wsl.exe ~ -d Ubuntu-22.04" }
