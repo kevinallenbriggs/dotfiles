@@ -136,3 +136,5 @@ alias dot='dotfiles'
 
 # set XDG Config dir
 export XDG_CONFIG_HOME="$HOME/.config"
+alias psup=nmcli con up 'PS Audio VPN'
+alias psdown=nmcli con down 'PS Audio VPN'
