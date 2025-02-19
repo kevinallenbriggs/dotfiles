@@ -28,7 +28,7 @@ dotfiles checkout wsl # Windows/WSL
 - dotfiles
 - jq
 - repos
-- wezterm/tmux/i3wm?
+- alacritty
 - shopify cli
 - command-not-found
 - glances
@@ -38,3 +38,4 @@ dotfiles checkout wsl # Windows/WSL
 - zoom
 - tmux
 - tpm
+- clipboard-cli (`npm install -g clipboard-cli`)
