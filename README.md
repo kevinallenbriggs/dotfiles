@@ -1,16 +1,14 @@
 # Setup
 
-https://www.atlassian.com/git/tutorials/dotfiles
-https://github.com/hendrikmi/dotfiles
-
 ```bash
 echo "alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'" >> $HOME/.zshrc
 echo "alias dot=dotfiles" >> $HOME/.zshrc
 
 mkdir -p $HOME/.dotfiles
 git clone --bare git@github.com:kevinallenbriggs/dotfiles.git $HOME/.dotfiles
+dotfiles config --local status.showUntrackedFiles no
 cd $HOME
-dotfiles checkout # Fedora
+dotfiles checkout # Linux
 dotfiles checkout wsl # Windows/WSL
 ```
 
@@ -39,3 +37,8 @@ dotfiles checkout wsl # Windows/WSL
 - tmux
 - tpm
 - clipboard-cli (`npm install -g clipboard-cli`)
+
+# See Also
+
+https://www.atlassian.com/git/tutorials/dotfiles
+https://github.com/hendrikmi/dotfiles
