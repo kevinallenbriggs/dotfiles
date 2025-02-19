@@ -16,7 +16,6 @@ local function mergeOpts(originalOpts, overrideOpts)
 end
 
 -- more convenient way to <Esc>
--- vim.keymap.set("n", "kj", "<Esc>", defaultOpts)
 vim.keymap.set("i", "kj", "<Esc>", defaultOpts)
 
 -- save file
@@ -48,17 +47,15 @@ vim.keymap.set("n", "<S-Tab>", ":bprevious<CR>", mergeOpts(defaultOpts, { desc =
 vim.keymap.set("n", "<leader>x", ":bdelete!<CR>", mergeOpts(defaultOpts, { desc = "Close Buffer" }))
 vim.keymap.set("n", "<leader>b", "<cmd> enew <CR>", mergeOpts(defaultOpts, { desc = "New Buffer" }))
 
--- Window management
+-- Splits
 vim.keymap.set("n", "<leader>Sv", "<C-w>v", mergeOpts(defaultOpts, { desc = "[S]plit [V]ertical" }))
 vim.keymap.set("n", "<leader>Sh", "<C-w>s", mergeOpts(defaultOpts, { desc = "[S]plit [H]orizontal" }))
 vim.keymap.set("n", "<leader>Sj", "<C-w>=", mergeOpts(defaultOpts, { desc = "[S]plit [E]qualize Sizes" }))
 vim.keymap.set("n", "<leader>Sx", ":close<CR>", mergeOpts(defaultOpts, { desc = "[S]plit Close [x]" }))
-
--- Navigate between splits
-vim.keymap.set("n", "<C-k>", ":wincmd k<CR>", defaultOpts)
-vim.keymap.set("n", "<C-j>", ":wincmd j<CR>", defaultOpts)
-vim.keymap.set("n", "<C-h>", ":wincmd h<CR>", defaultOpts)
-vim.keymap.set("n", "<C-l>", ":wincmd l<CR>", defaultOpts)
+vim.keymap.set("n", "<C-k>", ":wincmd k<CR>", mergeOpts(defaultOpts, { desc = "Move to above split" }))
+vim.keymap.set("n", "<C-j>", ":wincmd j<CR>", mergeOpts(defaultOpts, { desc = "Move to below split" }))
+vim.keymap.set("n", "<C-h>", ":wincmd h<CR>", mergeOpts(defaultOpts, { desc = "Move to left split" }))
+vim.keymap.set("n", "<C-l>", ":wincmd l<CR>", mergeOpts(defaultOpts, { desc = "Move to right split" }))
 
 -- Tabs
 vim.keymap.set("n", "<leader>To", ":tabnew<CR>", mergeOpts(defaultOpts, { desc = "[T]ab [O]pen" }))
@@ -80,4 +77,8 @@ vim.keymap.set("v", "p", '"_dP', defaultOpts)
 vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic message" })
 vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next diagnostic message" })
 vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
-vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
+vim.keymap.set("n", "<leader>D", vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
+
+-- Remap macro recording to <leader>q (default q)
+vim.keymap.set("n", "<leader>q", "q", mergeOpts(defaultOpts, { desc = "Record macro" }))
+vim.keymap.set("n", "q", "<Nop>", { silent = true })
