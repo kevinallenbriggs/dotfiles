@@ -140,3 +140,7 @@ export XDG_CONFIG_HOME="$HOME/.config"
 # PS Audio stuff
 alias psdown='nmcli con down "PS Audio VPN"'
 alias psup='nmcli con up "PS Audio VPN"'
+
+# lazygit
+alias lg='lazygit'
+alias dlg='lazygit -w $HOME -g $HOME/.dotfiles'
