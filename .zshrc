@@ -131,7 +131,7 @@ alias ll="ls -lahF"
 
 # enable command-not-found
 # source /etc/zsh_command_not_found
-alias dotfiles='/usr/bin/git --git-dir=/home/kevin/.dotfiles/ --work-tree=/home/kevin'
+alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias dot='dotfiles'
 
 # set XDG Config dir
