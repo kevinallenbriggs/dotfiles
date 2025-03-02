@@ -15,8 +15,8 @@ dotfiles checkout wsl # Windows/WSL
 # Software
 
 - git
-- lazygit
-- nvim
+- [lazygit](https://github.com/jesseduffield/lazygit?tab=readme-ov-file#installation)
+- [nvim](https://github.com/neovim/neovim/blob/master/INSTALL.md)
 - zsh
 - oh-my-zsh
 - nvm / node
