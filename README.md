@@ -3,13 +3,18 @@
 ```bash
 echo "alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'" >> $HOME/.zshrc
 echo "alias dot=dotfiles" >> $HOME/.zshrc
+source $HOME/.zshrc
 
 mkdir -p $HOME/.dotfiles
 git clone --bare git@github.com:kevinallenbriggs/dotfiles.git $HOME/.dotfiles
 dotfiles config --local status.showUntrackedFiles no
 cd $HOME
-dotfiles checkout # Linux
-dotfiles checkout wsl # Windows/WSL
+
+# Linux
+dotfiles checkout
+
+# Windows/WSL
+dotfiles checkout wsl
 ```
 
 # Software
