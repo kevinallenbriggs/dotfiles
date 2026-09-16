@@ -18,11 +18,8 @@ end
 -- more convenient way to <Esc>
 vim.keymap.set("i", "kj", "<Esc>", defaultOpts)
 
--- save file
-vim.keymap.set("n", "<C-s>", "<cmd> w <CR>", defaultOpts)
-
 -- save file without auto-formatting
-vim.keymap.set("n", "<leader>sn", "<cmd>noautocmd w <CR>", defaultOpts)
+vim.keymap.set("n", "<C-s>", "<cmd>noautocmd w <CR>", defaultOpts)
 
 -- delete single character without copying into register
 vim.keymap.set("n", "x", '"_x', defaultOpts)
@@ -45,12 +42,12 @@ vim.keymap.set("n", "<Right>", ":vertical resize +2<CR>", mergeOpts(defaultOpts,
 vim.keymap.set("n", "<Tab>", ":bnext<CR>", mergeOpts(defaultOpts, { desc = "Next Buffer" }))
 vim.keymap.set("n", "<S-Tab>", ":bprevious<CR>", mergeOpts(defaultOpts, { desc = "Previous Buffer" }))
 vim.keymap.set("n", "<leader>x", ":bdelete!<CR>", mergeOpts(defaultOpts, { desc = "Close Buffer" }))
-vim.keymap.set("n", "<leader>b", "<cmd> enew <CR>", mergeOpts(defaultOpts, { desc = "New Buffer" }))
+vim.keymap.set("n", "<leader>c", "<cmd> enew <CR>", mergeOpts(defaultOpts, { desc = "New Buffer" }))
 
 -- Splits
-vim.keymap.set("n", "<leader>Sv", "<C-w>v", mergeOpts(defaultOpts, { desc = "[S]plit [V]ertical" }))
-vim.keymap.set("n", "<leader>Sh", "<C-w>s", mergeOpts(defaultOpts, { desc = "[S]plit [H]orizontal" }))
-vim.keymap.set("n", "<leader>Sj", "<C-w>=", mergeOpts(defaultOpts, { desc = "[S]plit [E]qualize Sizes" }))
+vim.keymap.set("n", "<leader>Sv", "<C-w>v", mergeOpts(defaultOpts, { desc = "[S]plit [v]ertical" }))
+vim.keymap.set("n", "<leader>Sh", "<C-w>s", mergeOpts(defaultOpts, { desc = "[S]plit [h]orizontal" }))
+vim.keymap.set("n", "<leader>Se", "<C-w>=", mergeOpts(defaultOpts, { desc = "[S]plit [e]qualize Sizes" }))
 vim.keymap.set("n", "<leader>Sx", ":close<CR>", mergeOpts(defaultOpts, { desc = "[S]plit Close [x]" }))
 vim.keymap.set("n", "<C-k>", ":wincmd k<CR>", mergeOpts(defaultOpts, { desc = "Move to above split" }))
 vim.keymap.set("n", "<C-j>", ":wincmd j<CR>", mergeOpts(defaultOpts, { desc = "Move to below split" }))
@@ -73,6 +70,9 @@ vim.keymap.set("v", ">", ">gv", defaultOpts)
 -- Keep last yanked when pasting
 vim.keymap.set("v", "p", '"_dP', defaultOpts)
 
+-- undo/redo consistently on one key
+vim.keymap.set("n", "U", "<C-r>")
+
 -- Diagnostic keymaps
 vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic message" })
 vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next diagnostic message" })
@@ -80,5 +80,12 @@ vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, { desc = "Open float
 vim.keymap.set("n", "<leader>D", vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
 
 -- Remap macro recording to <leader>q (default q)
-vim.keymap.set("n", "<leader>q", "q", mergeOpts(defaultOpts, { desc = "Record macro" }))
-vim.keymap.set("n", "q", "<Nop>", { silent = true })
+-- vim.keymap.set("n", "<leader>q", "q", mergeOpts(defaultOpts, { desc = "Record macro" }))
+-- vim.keymap.set("n", "q", "<Nop>", { silent = true })
+
+vim.keymap.set(
+	"n",
+	"<M-s>",
+	":TermExec cmd='sesh connect $(sesh list | fzf)'<CR>",
+	mergeOpts(defaultOpts, { desc = "Open sesh session manager" })
+)

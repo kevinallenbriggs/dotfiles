@@ -10,7 +10,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 #ZSH_THEME="robbyrussell"
 #ZSH_THEME="agnoster"
-ZSH_THEME="af-magic"
+ZSH_THEME="agnoster"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -73,7 +73,7 @@ ZSH_THEME="af-magic"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 # plugins=(git aliases rsync docker docker-compose command-not-found colored-man-pages sudo)
-plugins=(git aliases rsync docker docker-compose colored-man-pages sudo)
+plugins=(git aliases rsync docker docker-compose colored-man-pages sudo zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -106,6 +106,10 @@ source $ZSH/oh-my-zsh.sh
 # PS Audio
 alias psc="ps-shopify-cli"
 
+# git
+alias gbsup="ggsup"
+
+# Node Version Manager
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
@@ -124,10 +128,10 @@ alias ez="v ~/.zshrc"
 alias sz="source ~/.zshrc"
 alias et="v ~/.config/tmux/tmux.conf"
 alias st="tmux source ~/.config/tmux/tmux.conf"
-alias ev="v ~/.config/nvim/"
+alias ev="v --cmd 'cd ~/.config/nvim' ~/.config/nvim/init.lua"
 
 # QOL
-alias ll="ls -lahF"
+# alias ll="ls -lahF"
 
 # enable command-not-found
 # source /etc/zsh_command_not_found
@@ -144,3 +148,81 @@ alias psup='nmcli con up "PS Audio VPN"'
 # lazygit
 alias lg='lazygit'
 alias dlg='lazygit -w $HOME -g $HOME/.dotfiles'
+
+# add bin directory to path (python, etc)
+export PATH="$PATH:/home/kevin/.local/bin"
+
+# starship
+eval "$(starship init zsh)"
+
+# zoxide
+eval "$(zoxide init zsh)"
+alias cd='z'
+alias cdi='zi'
+
+# exa
+alias ls='eza'
+alias ll='eza -lh --total-size'
+
+# bat
+alias cat='bat'
+
+# ranger file manager
+RANGER_LOAD_DEFAULT_RC=FALSE
+
+# yazi file manager
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		builtin cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
+}
+
+# easy repo navigation
+# alias v:labels="v --cmd 'cd /repos/psaudio/labels/'"
+# alias v:dawn="v --cmd 'cd /repos/psaudio/shopify/themes/dawn-customized/'"
+# alias v:cli="v --cmd 'cd /repos/psaudio/shopify/shopify-admin-cli/'"
+# alias v:youtrack="v --cmd 'cd /repos/psaudio/youtrack-story-templates/'"
+# alias v:docker="v --cmd 'cd /repos/psaudio/docker-images/'"
+# alias v:discourse="v --cmd 'cd /repos/psaudio/discourse-development/'"
+
+# add GOPATH to PATH
+export PATH="$PATH:/home/kevin/go/bin"
+
+# sesh session manager
+# https://github.com/joshmedeski/sesh#zsh-keybind
+# https://www.youtube.com/watch?v=-yX3GjZfb5Y
+function sesh-sessions() {
+  {
+    exec </dev/tty
+    exec <&1
+    local session
+    session=$(sesh list -t -c | fzf --height 40% --reverse --border-label ' sesh ' --border --prompt '⚡  ')
+    zle reset-prompt > /dev/null 2>&1 || true
+    [[ -z "$session" ]] && return
+    sesh connect $session
+  }
+}
+
+zle     -N             sesh-sessions
+bindkey -M emacs '\es' sesh-sessions
+bindkey -M vicmd '\es' sesh-sessions
+bindkey -M viins '\es' sesh-sessions
+
+# start tmux automatically
+# if [ -z "$TMUX" ]; then
+#   tmux attach || exec tmux new-session && exit;
+# fi
+
+# syntax highlighting (must be at end)
+source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+PATH="/home/kevin/perl5/bin${PATH:+:${PATH}}"; export PATH;
+PERL5LIB="/home/kevin/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
+PERL_LOCAL_LIB_ROOT="/home/kevin/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
+PERL_MB_OPT="--install_base \"/home/kevin/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=/home/kevin/perl5"; export PERL_MM_OPT;
+export PATH="/home/kevin/.config/herd-lite/bin:$PATH"
+export PHP_INI_SCAN_DIR="/home/kevin/.config/herd-lite/bin:$PHP_INI_SCAN_DIR"

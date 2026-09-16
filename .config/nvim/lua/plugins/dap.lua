@@ -21,67 +21,77 @@ return {
 		"williamboman/mason.nvim",
 		"jay-babu/mason-nvim-dap.nvim",
 
+		-- Display value of local variables beside delcarations
+		"theHamsta/nvim-dap-virtual-text",
+
 		-- Add your own debuggers here
 		-- "leoluz/nvim-dap-go",
 	},
 	keys = {
 		-- Basic debugging keymaps, feel free to change to your liking!
 		{
-			"<F5>",
+			"<leader>ds",
 			function()
 				require("dap").continue()
 			end,
-			desc = "Debug: Start/Continue",
+			desc = "[d]ebug: [s]tart",
 		},
 		{
-			"<F1>",
+			"<leader>dS",
+			function()
+				require("dap").terminate()
+			end,
+			desc = "[d]ebug: [S]top",
+		},
+		{
+			"<leader>dc",
+			function()
+				require("dap").continue()
+			end,
+			desc = "[d]ebug: [c]ontinue",
+		},
+		{
+			"<leader>di",
 			function()
 				require("dap").step_into()
 			end,
-			desc = "Debug: Step Into",
+			desc = "[d]ebug: Step [i]nto",
 		},
 		{
-			"<F2>",
+			"<leader>dv",
 			function()
 				require("dap").step_over()
 			end,
-			desc = "Debug: Step Over",
+			desc = "[d]ebug: Step O[v]er",
 		},
 		{
-			"<F3>",
+			"<leader>do",
 			function()
 				require("dap").step_out()
 			end,
-			desc = "Debug: Step Out",
+			desc = "[d]ebug: Step [o]ut",
 		},
 		{
 			"<leader>db",
 			function()
 				require("dap").toggle_breakpoint()
 			end,
-			desc = "[D]ebug: Toggle [B]reakpoint",
+			desc = "[d]ebug: Toggle [b]reakpoint",
 		},
 		{
 			"<leader>dB",
 			function()
 				require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: "))
 			end,
-			desc = "[D]ebug: Set [B]reakpoint Condition",
+			desc = "[d]ebug: Set [B]reakpoint Condition",
 		},
 		-- Toggle to see last session result. Without this, you can't see session output in case of unhandled exception.
 		{
-			"<F7>",
+			"<leader>dt",
 			function()
 				require("dapui").toggle()
 			end,
-			desc = "Debug: See last session result.",
-		},
-		{
-			"<leader>dx",
-			function()
-				require("dapui").close()
-			end,
-			desc = "[D]ebug: Close [x]",
+			desc = "[d]ebug: [t]oggle UI",
 		},
 	},
 	config = function()
@@ -110,19 +120,18 @@ return {
 		dap.adapters.php = {
 			type = "executable",
 			command = "node",
-			args = { "/opt/vscode-php-debug/out/phpDebug.js" },
+			args = { "/repos/vscode-php-debug/out/phpDebug.js" },
 		}
 
 		dap.configurations.php = {
 			{
 				type = "php",
 				request = "launch",
-				name = "Listen for Xdebug",
-				port = 9003,
-				-- hostname = "0.0.0.0",
+				port = 9000,
 				pathMappings = {
-					["/var/www/html"] = "${workspaceFolder}",
+					["/var/www/html/"] = "${workspaceFolder}",
 				},
+				-- log = true,
 			},
 		}
 
@@ -149,16 +158,28 @@ return {
 		})
 
 		-- Change breakpoint icons
-		-- vim.api.nvim_set_hl(0, 'DapBreak', { fg = '#e51400' })
-		-- vim.api.nvim_set_hl(0, 'DapStop', { fg = '#ffcc00' })
-		-- local breakpoint_icons = vim.g.have_nerd_font
-		--     and { Breakpoint = '', BreakpointCondition = '', BreakpointRejected = '', LogPoint = '', Stopped = '' }
-		--   or { Breakpoint = '●', BreakpointCondition = '⊜', BreakpointRejected = '⊘', LogPoint = '◆', Stopped = '⭔' }
-		-- for type, icon in pairs(breakpoint_icons) do
-		--   local tp = 'Dap' .. type
-		--   local hl = (type == 'Stopped') and 'DapStop' or 'DapBreak'
-		--   vim.fn.sign_define(tp, { text = icon, texthl = hl, numhl = hl })
-		-- end
+		vim.api.nvim_set_hl(0, "DapBreak", { fg = "#e51400" })
+		vim.api.nvim_set_hl(0, "DapStop", { fg = "#ffcc00" })
+		local breakpoint_icons = vim.g.have_nerd_font
+				and {
+					Breakpoint = "",
+					BreakpointCondition = "",
+					BreakpointRejected = "",
+					LogPoint = "",
+					Stopped = "",
+				}
+			or {
+				Breakpoint = "●",
+				BreakpointCondition = "⊜",
+				BreakpointRejected = "⊘",
+				LogPoint = "◆",
+				Stopped = "⭔",
+			}
+		for type, icon in pairs(breakpoint_icons) do
+			local tp = "Dap" .. type
+			local hl = (type == "Stopped") and "DapStop" or "DapBreak"
+			vim.fn.sign_define(tp, { text = icon, texthl = hl, numhl = hl })
+		end
 
 		dap.listeners.after.event_initialized["dapui_config"] = dapui.open
 		dap.listeners.before.event_terminated["dapui_config"] = dapui.close

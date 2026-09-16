@@ -77,7 +77,7 @@ return {
 
 				-- Fuzzy find all the symbols in your current document.
 				--  Symbols are things like variables, functions, types, etc.
-				map("<leader>ds", require("telescope.builtin").lsp_document_symbols, "[D]ocument [S]ymbols")
+				map("<leader>ss", require("telescope.builtin").lsp_document_symbols, "[s]earch [s]ymbols")
 
 				-- Fuzzy find all the symbols in your current workspace.
 				--  Similar to document symbols, except searches over your entire project.
@@ -163,7 +163,14 @@ return {
 		--  - settings (table): Override the default settings passed when initializing the server.
 		--        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
 		local servers = {
-			phpactor = {},
+			phpactor = {
+				settings = {
+					init_options = {
+						["language_server_phpstan.enabled"] = true,
+						["language_server_psalm.enabled"] = false,
+					},
+				},
+			},
 			shopify_theme_ls = {},
 			ts_ls = {},
 			jsonls = {},

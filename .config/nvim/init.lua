@@ -31,6 +31,11 @@ require("lazy").setup({
 	require("plugins.gitsigns"),
 	require("plugins.alpha"),
 	require("plugins.indent-blankline"),
-	require("plugins.debug"),
+	require("plugins.dap"),
+	require("plugins.lazygit"),
+	require("plugins.noice"),
+	require("plugins.dadbod"),
+	require("plugins.flash"),
+	require("plugins.php-namespace"),
 	require("plugins.misc"),
 })
