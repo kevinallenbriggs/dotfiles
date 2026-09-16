@@ -3,6 +3,7 @@
 ```bash
 echo "alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'" >> $HOME/.zshrc
 echo "alias dot=dotfiles" >> $HOME/.zshrc
+source $HOME/.zshrc
 
 mkdir -p $HOME/.dotfiles
 git clone --bare git@github.com:kevinallenbriggs/dotfiles.git $HOME/.dotfiles
